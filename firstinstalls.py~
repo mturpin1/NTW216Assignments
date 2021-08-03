@@ -2,15 +2,17 @@ import subprocess
 import time
 import sys
 import json
+import time
 
 psPath = 'powershell.exe'
 summary = []
 
 def refreshenv():
     try:
-        refresh = 'refreshenv'
+        refresh = psPath + ' ' + 'refreshenv'
         command1 = refresh.split()
         print('Refreshing the environment. . .')
+        print(command1)
         output = subprocess.run(command1)
         result = ('-Refreshed the environment')
         print(result)
@@ -131,7 +133,9 @@ def install(package):
         summary.append(result)
         sys.exit(1)
 
+refreshenv()
 
+"""
 try:
     testAPSCommand('Get-ExecutionPolicy', 'RemoteSigned')
 except:
@@ -140,6 +144,8 @@ except:
     except:
         print('Error setting ExecutionPolicy')
         sys.exit(1)
+finally:
+    refreshenv()
 
 try:
     test('choco')
@@ -150,12 +156,16 @@ except:
         print('Error installing Chocolatey')
         sys.exit(1)
     finally:
+        refreshenv()
         try:
             test('choco')
         except:
             print('Error installing Chocolatey')
             sys.exit(1)
             refreshenv()        
+finally:
+    refreshenv()
+
 try:
     test('gh')
 except:
@@ -163,6 +173,8 @@ except:
         install('gh')
     except:
         print('Error installing GitHub')
+finally:
+    refreshenv()
 
 try:
     test('git')
@@ -171,6 +183,8 @@ except:
         install('git.install')
     except:
         print('Error installing git')
+finally:
+    refreshenv()
 
 try:
     test('python --version')
@@ -179,6 +193,8 @@ except:
         install('python')
     except:
         print('Error installing Python')
+finally:
+    refreshenv()
 
 try:
     test('notepad++ -systemtray')
@@ -187,6 +203,8 @@ except:
         install('notepadplusplus')
     except:
         print('Error installing Notepad++')
+finally:
+    refreshenv()
 
 try:
     runAPSCommand('(Get-Item "C:\Program Files\Google\Chrome\Application\chrome.exe").VersionInfo')
@@ -195,6 +213,8 @@ except:
         install('googlechrome')
     except:
         print('Error installing Google Chrome')
+finally:
+    refreshenv()
 
 try:
     test('code --version')
@@ -203,9 +223,11 @@ except:
         install('vscode')
     except:
         print('Error installing Visual Studio Code')
+finally:
+    refreshenv()
 
 try:
-    with open("file.json", 'w') as f:
+    with open("file.json" + time.strftime("%a%d%b%Y%H.%M.%S.%f%p"), 'w') as f:
         json.dump(summary, f, indent=2)
 except:
     print('Error creating summary file')
@@ -214,4 +236,4 @@ try:
     print('\n'.join(map(str, summary)))
 except:
     print('Error printing event summary')
-    sys.exit(1)
+    sys.exit(1)"""

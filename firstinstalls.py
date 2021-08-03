@@ -9,9 +9,10 @@ summary = []
 
 def refreshenv():
     try:
-        refresh = 'refreshenv'
+        refresh = psPath + ' ' + 'refreshenv'
         command1 = refresh.split()
         print('Refreshing the environment. . .')
+        print(command1)
         output = subprocess.run(command1)
         result = ('-Refreshed the environment')
         print(result)
@@ -131,7 +132,6 @@ def install(package):
         result = ('-Failed to install the package >> {package}')
         summary.append(result)
         sys.exit(1)
-
 
 try:
     testAPSCommand('Get-ExecutionPolicy', 'RemoteSigned')

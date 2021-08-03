@@ -12,7 +12,6 @@ def refreshenv():
         refresh = psPath + ' ' + 'refreshenv'
         command1 = refresh.split()
         print('Refreshing the environment. . .')
-        print(command1)
         output = subprocess.run(command1)
         result = ('-Refreshed the environment')
         print(result)
@@ -50,7 +49,7 @@ def runAPSCommand(command):
         print(result)
         summary.append(result)
     except:
-        result = ('-Failed to run the PowerShell command >> {command}')
+        result = (f'-Failed to run the PowerShell command >> {command}')
         print(result)
         summary.append(result)
         sys.exit(1)
@@ -83,15 +82,15 @@ def testAPSCommand(command, check):
         outputResult = " ".join(map(str, result))
         if outputResult != check:
             print(f'Command\'{command}\' returned an unexpected value >> \'{outputResult}\'\nExpected >> \'{check}\'')
-            result = ('-Tested the PowerShell command >> {command} with the test value >> {check}\nCheck returned with unexpected value >> {outputResult}')
+            result = (f'-Tested the PowerShell command >> {command} with the test value >> {check}\nCheck returned with unexpected value >> {outputResult}')
             summary.append(result)
             sys.exit(1)
         else:
             print(f'Command\'{command}\' returned the expected value')
-            result = ('-Tested the PowerShell command >> {command} with the test value >> {check}\nCheck returned with an expected value >> {outputResult}')
+            result = (f'-Tested the PowerShell command >> {command} with the test value >> {check}\nCheck returned with an expected value >> {outputResult}')
             summary.append(result)
     except:
-        result = ('-Failed to test the PowerShell command >> {command} with the test value >> {check}')
+        result = (f'-Failed to test the PowerShell command >> {command} with the test value >> {check}')
         print(result)
         summary.append(result)
         sys.exit(1)
@@ -106,15 +105,15 @@ def testACommand(command, check):
         outputResult = " ".join(map(str, result))
         if outputResult != check:
             print(f'Command \'{command}\' returned an unexpected value >> \'{outputResult}\'\nExpected >> \'{check}\'')
-            result = ('-Tested the command >> {command} with the test value >> {check}\nCheck returned with an unexpected value >> {outputResult}')
+            result = (f'-Tested the command >> {command} with the test value >> {check}\nCheck returned with an unexpected value >> {outputResult}')
             summary.append(result)
             sys.exit(1)
         else:
             print(f'Command \'{command}\' returned the expected value')
-            result = ('-Tested the command >> {command} with the test value >> {check}\nCheck returned with an expected value >> {outputResult}')
+            result = (f'-Tested the command >> {command} with the test value >> {check}\nCheck returned with an expected value >> {outputResult}')
             summary.append(result)
     except:
-        result = ('-Failed to test the command >> {command} with the test value {check}')
+        result = (f'-Failed to test the command >> {command} with the test value {check}')
         summary.append(result)
         sys.exit(1)
 
@@ -126,10 +125,10 @@ def install(package):
         print(f'Installing {package}. . .')
         output = subprocess.run(command1)
         print(f'{package} installed successfully!')
-        result = ('-Installed the package >> {package}')
+        result = (f'-Installed the package >> {package}')
         summary.append(result)
     except:
-        result = ('-Failed to install the package >> {package}')
+        result = (f'-Failed to install the package >> {package}')
         summary.append(result)
         sys.exit(1)
 
@@ -224,7 +223,7 @@ finally:
     refreshenv()
 
 try:
-    with open("file.json" + time.strftime("%a%d%b%Y%H.%M.%S.%f%p"), 'w') as f:
+    with open("Summary" + time.strftime("%a%d%b%Y\'%H.%M.%S%p\'" + ".json"), 'w') as f:
         json.dump(summary, f, indent=2)
 except:
     print('Error creating summary file')

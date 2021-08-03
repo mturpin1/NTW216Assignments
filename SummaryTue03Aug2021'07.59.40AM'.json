@@ -1,0 +1,19 @@
+[
+  "-Tested the PowerShell command >> Get-ExecutionPolicy with the test value >> RemoteSigned\nCheck returned with an expected value >> RemoteSigned",
+  "-Refreshed the environment",
+  "-Found the package >> choco",
+  "-Refreshed the environment",
+  "-Found the package >> gh",
+  "-Refreshed the environment",
+  "-Found the package >> git",
+  "-Refreshed the environment",
+  "-Found the package >> python --version",
+  "-Refreshed the environment",
+  "-Found the package >> notepad++ -systemtray",
+  "-Refreshed the environment",
+  "-Ran the PowerShell command >> (Get-Item \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\").VersionInfo",
+  "-Refreshed the environment",
+  "-Failed to find the package >> code --version",
+  "-Installed the package >> vscode",
+  "-Refreshed the environment"
+]

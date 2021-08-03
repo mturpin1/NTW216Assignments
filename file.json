@@ -1,0 +1,12 @@
+[
+  "-Tested the PowerShell command >> {command} with the test value >> {check}\nCheck returned with an expected value >> {outputResult}",
+  "-Found the package >> choco",
+  "-Found the package >> gh",
+  "-Found the package >> git",
+  "-Found the package >> python --version",
+  "-Found the package >> notepad++ -systemtray",
+  "-Ran the PowerShell command >> (Get-Item \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\").VersionInfo",
+  "-Failed to find the package >> code --version",
+  "-Installed the package >> {package}",
+  "-Failed to refresh the environment"
+]

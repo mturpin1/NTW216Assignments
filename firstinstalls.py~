@@ -11,7 +11,7 @@ def refreshenv():
         refresh = 'refreshenv'
         command1 = refresh.split()
         print('Refreshing the environment. . .')
-        output = subprocess.run(command1, capture_output=True)
+        output = subprocess.run(command1)
         result = ('-Refreshed the environment')
         print(result)
         summary.append(result)
@@ -146,7 +146,6 @@ try:
 except:
     try:
         runAPSCommand('Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(\'https://chocolatey.org/install.ps1\'))')
-        refreshenv()
     except:
         print('Error installing Chocolatey')
         sys.exit(1)
@@ -156,13 +155,12 @@ except:
         except:
             print('Error installing Chocolatey')
             sys.exit(1)
-
+            refreshenv()        
 try:
     test('gh')
 except:
     try:
         install('gh')
-        refreshenv()
     except:
         print('Error installing GitHub')
 
@@ -171,7 +169,6 @@ try:
 except:
     try:
         install('git.install')
-        refreshenv()
     except:
         print('Error installing git')
 
@@ -180,7 +177,6 @@ try:
 except:
     try:
         install('python')
-        refreshenv()
     except:
         print('Error installing Python')
 
@@ -189,7 +185,6 @@ try:
 except:
     try:
         install('notepadplusplus')
-        refreshenv()
     except:
         print('Error installing Notepad++')
 
@@ -198,7 +193,6 @@ try:
 except:
     try:
         install('googlechrome')
-        refreshenv()
     except:
         print('Error installing Google Chrome')
 
@@ -207,7 +201,6 @@ try:
 except:
     try:
         install('vscode')
-        refreshenv()
     except:
         print('Error installing Visual Studio Code')
 
@@ -215,7 +208,7 @@ try:
     with open("file.json", 'w') as f:
         json.dump(summary, f, indent=2)
 except:
-    print('Error creaeting summary file')
+    print('Error creating summary file')
 
 try:
     print('\n'.join(map(str, summary)))

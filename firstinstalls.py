@@ -2,6 +2,7 @@ import subprocess
 import time
 import sys
 import json
+import time
 
 psPath = 'powershell.exe'
 summary = []
@@ -140,82 +141,93 @@ except:
     except:
         print('Error setting ExecutionPolicy')
         sys.exit(1)
+finally:
+    refreshenv()
 
 try:
     test('choco')
 except:
     try:
         runAPSCommand('Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString(\'https://chocolatey.org/install.ps1\'))')
-        refreshenv()
     except:
         print('Error installing Chocolatey')
         sys.exit(1)
     finally:
+        refreshenv()
         try:
             test('choco')
         except:
             print('Error installing Chocolatey')
             sys.exit(1)
+            refreshenv()        
+finally:
+    refreshenv()
 
 try:
     test('gh')
 except:
     try:
         install('gh')
-        refreshenv()
     except:
         print('Error installing GitHub')
+finally:
+    refreshenv()
 
 try:
     test('git')
 except:
     try:
         install('git.install')
-        refreshenv()
     except:
         print('Error installing git')
+finally:
+    refreshenv()
 
 try:
     test('python --version')
 except:
     try:
         install('python')
-        refreshenv()
     except:
         print('Error installing Python')
+finally:
+    refreshenv()
 
 try:
     test('notepad++ -systemtray')
 except:
     try:
         install('notepadplusplus')
-        refreshenv()
     except:
         print('Error installing Notepad++')
+finally:
+    refreshenv()
 
 try:
     runAPSCommand('(Get-Item "C:\Program Files\Google\Chrome\Application\chrome.exe").VersionInfo')
 except:
     try:
         install('googlechrome')
-        refreshenv()
     except:
         print('Error installing Google Chrome')
+finally:
+    refreshenv()
 
 try:
     test('code --version')
 except:
     try:
         install('vscode')
-        refreshenv()
     except:
         print('Error installing Visual Studio Code')
+finally:
+    refreshenv()
 
 try:
-    with open("file.json", 'w') as f:
+    with open("file.json" + time.strftime("%a%d%b%Y%H.%M.%S.%f%p"), 'w') as f:
         json.dump(summary, f, indent=2)
 except:
-    print('Error creaeting summary file')
+    print('Error creating summary file')
 
 try:
     print('\n'.join(map(str, summary)))

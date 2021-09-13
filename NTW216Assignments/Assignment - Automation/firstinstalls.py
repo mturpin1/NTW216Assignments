@@ -2,7 +2,6 @@ import subprocess
 import time
 import sys
 import json
-import time
 
 psPath = 'powershell.exe'
 summary = []
